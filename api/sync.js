@@ -153,6 +153,9 @@ async function syncJob(interval, tableName) {
 
 // Serverless Handler
 module.exports = async function(req, res) {
+    // Force Vercel to never cache this endpoint
+    res.setHeader('Cache-Control', 'no-store, max-age=0, must-revalidate');
+
     try {
         await syncJob('240', 'klines');
         await syncJob('720', 'klines_12h');
