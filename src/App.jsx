@@ -29,8 +29,8 @@ function App() {
     };
 
     fetchData();
-    // Auto-refresh data every 5 minutes just in case
-    const interval = setInterval(fetchData, 5 * 60 * 1000);
+    // Auto-refresh data every 1 minute
+    const interval = setInterval(fetchData, 1 * 60 * 1000);
     return () => clearInterval(interval);
   }, [timeframe]);
 
