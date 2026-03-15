@@ -35,7 +35,7 @@ function App() {
   }, [timeframe]);
 
   const formatTime = (ts) => {
-    const d = new Date(ts);
+    const d = new Date(Number(ts));
     const local = d.toLocaleString(undefined, {
       year: 'numeric', month: 'short', day: 'numeric',
       hour: '2-digit', minute: '2-digit'
@@ -218,17 +218,17 @@ function App() {
                     <td className="col-sar">{formatNumber(row.sar1)}</td>
                     <td className="col-sar">{row.sar2 === 0 ? '-' : formatNumber(row.sar2)}</td>
                     
-                    <td className="close-group-cell first" style={{ fontWeight: typeof row.closePts === 'number' && row.closePts > 0 ? 600 : 400 }}>
-                      {formatNumber(row.closeValue)}
+                    <td className="close-group-cell first" style={{ fontWeight: typeof row.closepts === 'number' && row.closepts > 0 ? 600 : 400 }}>
+                      {formatNumber(row.closevalue)}
                     </td>
-                    <td className={`close-group-cell ${row.closePts > 0 ? 'val-positive' : row.closePts < 0 ? 'val-negative' : 'val-neutral'}`}>
-                      {row.closePts > 0 ? '+' : ''}{formatNumber(row.closePts)}
+                    <td className={`close-group-cell ${row.closepts > 0 ? 'val-positive' : row.closepts < 0 ? 'val-negative' : 'val-neutral'}`}>
+                      {row.closepts > 0 ? '+' : ''}{formatNumber(row.closepts)}
                     </td>
-                    <td className={`close-group-cell ${row.closePct > 0 ? 'val-positive' : row.closePct < 0 ? 'val-negative' : 'val-neutral'}`}>
-                      {row.closePct > 0 ? '+' : ''}{formatNumber(row.closePct)}%
+                    <td className={`close-group-cell ${row.closepct > 0 ? 'val-positive' : row.closepct < 0 ? 'val-negative' : 'val-neutral'}`}>
+                      {row.closepct > 0 ? '+' : ''}{formatNumber(row.closepct)}%
                     </td>
                     <td className="close-group-cell text-muted">
-                      {formatNumber(row.closeVol)}
+                      {formatNumber(row.closevol)}
                     </td>
                   </tr>
                 ))}
