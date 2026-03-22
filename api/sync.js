@@ -90,8 +90,10 @@ async function processAndSaveData(klines, tableName) {
                     sar1 = roundedCalcSar;
                 }
                 
-                // Use Math.abs to prevent JS floating point strict-equality bugs
-                if (Math.abs(roundedCalcSar - sar1) > 0.001) {
+                // Clean the Postgres REAL float precision noise before comparison
+                const cleanSar1 = Number(Number(sar1).toFixed(2));
+                
+                if (roundedCalcSar !== cleanSar1) {
                     sar2 = roundedCalcSar;
                 } else {
                     sar2 = 0;
