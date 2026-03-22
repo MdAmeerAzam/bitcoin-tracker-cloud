@@ -34,8 +34,10 @@ async function fetchHistoricalData(interval) {
 
         return klines;
     } catch (error) {
-        console.error('Error fetching historical data:', error);
-        return [];
+        let msg = error.message;
+        if (error.response) msg = `HTTP ${error.response.status}: ${JSON.stringify(error.response.data)}`;
+        console.error('Bybit Fetch Error:', msg);
+        throw new Error(`Failed to fetch Bybit data: ${msg}`);
     }
 }
 
@@ -88,7 +90,8 @@ async function processAndSaveData(klines, tableName) {
                     sar1 = roundedCalcSar;
                 }
                 
-                if (roundedCalcSar !== sar1) {
+                // Use Math.abs to prevent JS floating point strict-equality bugs
+                if (Math.abs(roundedCalcSar - sar1) > 0.001) {
                     sar2 = roundedCalcSar;
                 } else {
                     sar2 = 0;
